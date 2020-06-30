@@ -53,7 +53,12 @@ export default {
       type: 2,
       page: 1
     }).then(res => {
-      console.log('res--->', res);
+      console.log(res);
+      this.notify({
+        type: 'success',
+        title: '成功',
+        msg: '查询成功！'
+      });
     });
   },
   methods: {}

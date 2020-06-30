@@ -11,7 +11,7 @@
         <el-button type="primary" icon="el-icon-search" @click="handleSearch">搜索</el-button>
       </div>
       <div class="handle-box">
-        <el-button type="success" icon="el-icon-delete" class="handle-del mr10" @click="add">新增</el-button>
+        <el-button type="success" icon="el-icon-delete" class="handle-del mr10">新增</el-button>
       </div>
       <el-table :data="tableData" border class="table" ref="multipleTable" header-cell-class-name="table-header" @selection-change="handleSelectionChange">
         <el-table-column type="selection" width="55" align="center"></el-table-column>
