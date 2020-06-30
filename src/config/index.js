@@ -1,3 +1,3 @@
 module.exports = {
-  baseUrl: 'https://smartschool.soft-in-hard.vip'
+  baseUrl: 'https://zhixiaosheapi.soft-in-hard.vip'
 }
