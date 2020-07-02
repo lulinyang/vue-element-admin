@@ -13,4 +13,11 @@ export class ucenterService extends fetch {
   getTopicList(data) {
     return this.post('/api/Topic/TopicList', data)
   }
+
+  /**
+   * 登录
+   */
+  userLogin(data){
+    return this.post('/admin/auth/login', data)
+  }
 }

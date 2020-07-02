@@ -1,3 +1,4 @@
 module.exports = {
-  baseUrl: 'https://zhixiaosheapi.soft-in-hard.vip'
+  baseUrl: 'http://www.adminvue.com'
+  // baseUrl: 'https://zhixiaosheapi.soft-in-hard.vip'
 }
