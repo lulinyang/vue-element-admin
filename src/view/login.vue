@@ -16,19 +16,22 @@
         <div class="login-btn">
           <el-button type="primary" @click="submitForm()">登录</el-button>
         </div>
-        <p class="login-tips">Tips : 用户名和密码随便填。</p>
+        <!-- <p class="login-tips">Tips : 用户名和密码随便填。</p> -->
       </el-form>
     </div>
   </div>
 </template>
 
 <script>
+
+import { UcenterService } from '@/services'
+
 export default {
   data: function () {
     return {
       param: {
-        username: 'admin',
-        password: '123123',
+        username: '',
+        password: '',
       },
       rules: {
         username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
@@ -40,12 +43,18 @@ export default {
     submitForm () {
       this.$refs.login.validate(valid => {
         if (valid) {
-          this.$message.success('登录成功');
-          localStorage.setItem('ms_username', this.param.username);
-          this.$router.push('/');
+          UcenterService.userLogin({
+            username: this.param.username,
+            password: this.param.password
+          }).then(res => {
+            console.log(res);return;
+          })
+          // this.$message.success('登录成功');
+          // localStorage.setItem('ms_username', this.param.username);
+          // this.$router.push('/');
         } else {
           this.$message.error('请输入账号和密码');
-          console.log('error submit!!');
+          // console.log('error submit!!');
           return false;
         }
       });
