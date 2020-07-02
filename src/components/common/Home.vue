@@ -5,7 +5,7 @@
     <div class="content-box" :class="{'content-collapse':collapse}">
       <v-tags></v-tags>
       <div class="content">
-        <transition name="move" mode="out-in">
+        <transition name="fade-transform" mode="out-in">
           <keep-alive :include="tagsList">
             <router-view></router-view>
           </keep-alive>
@@ -40,3 +40,20 @@ export default {
   }
 };
 </script>
+<style>
+/* fade-transform */
+.fade-transform-leave-active,
+.fade-transform-enter-active {
+    transition: all 0.5s;
+}
+
+.fade-transform-enter {
+    opacity: 0;
+    transform: translateX(-30px);
+}
+
+.fade-transform-leave-to {
+    opacity: 0;
+    transform: translateX(30px);
+}
+</style>

@@ -36,6 +36,13 @@ export default new Router({
           }
         },
         {
+          path: '/excel',
+          component: resolve => require(['@/view/Excel/index.vue'], resolve),
+          meta: {
+            title: 'Excel'
+          }
+        },
+        {
           path: '/404',
           component: () => import('@/view/common/404.vue'),
           meta: {
