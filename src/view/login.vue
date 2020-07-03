@@ -61,15 +61,15 @@ export default {
                             localStorage.setItem('sessionId', res.data.sessionId); // 用户sessionid
                             // window.axios.defaults.headers.authKey = localStorage.getItem('authKey');
                             let routerUrl = '';
-                            if (res.data.menusList[0].url) {
+                            if (res.data.menusList[0].url != "") {
                                 routerUrl = res.data.menusList[0].url;
                             } else {
-                                routerUrl = res.data.menusList[0].child[0].child[0].url;
+                                routerUrl = res.data.menusList[0].bus[0].url;
                             }
                             setTimeout(() => {
                                 let path = this.$route.path;
                                 if (routerUrl != path) {
-                                    router.replace(routerUrl);
+                                    this.$router.replace(routerUrl);
                                 } else {
                                     this.$message.error('没有权限');
                                 }
