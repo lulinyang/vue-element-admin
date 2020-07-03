@@ -3,7 +3,8 @@
     <v-head></v-head>
     <v-sidebar></v-sidebar>
     <div class="content-box" :class="{'content-collapse':collapse}">
-      <v-tags></v-tags>
+      <!-- <v-tags></v-tags> -->
+      <tags-view></tags-view>
       <div class="content">
         <transition name="fade-transform" mode="out-in">
           <keep-alive :include="tagsList">
@@ -21,6 +22,7 @@ import vHead from './Header.vue';
 import vSidebar from './Sidebar.vue';
 import vTags from './Tags.vue';
 import bus from './bus';
+import TagsView from './TagsView.vue';;
 export default {
   data () {
     return {
@@ -31,7 +33,8 @@ export default {
   components: {
     vHead,
     vSidebar,
-    vTags
+    vTags,
+    TagsView
   },
   created () {
     bus.$on('collapse-content', msg => {
