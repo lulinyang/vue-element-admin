@@ -1,65 +1,94 @@
 <template>
-  <div class="login-wrap">
-    <div class="ms-login">
-      <div class="ms-title">后台管理系统</div>
-      <el-form :model="param" :rules="rules" ref="login" label-width="0px" class="ms-content">
-        <el-form-item prop="username">
-          <el-input v-model="param.username" placeholder="username">
-            <el-button slot="prepend" icon="el-icon-lx-people"></el-button>
-          </el-input>
-        </el-form-item>
-        <el-form-item prop="password">
-          <el-input type="password" placeholder="password" v-model="param.password" @keyup.enter.native="submitForm()">
-            <el-button slot="prepend" icon="el-icon-lx-lock"></el-button>
-          </el-input>
-        </el-form-item>
-        <div class="login-btn">
-          <el-button type="primary" @click="submitForm()">登录</el-button>
+    <div class="login-wrap">
+        <div class="ms-login">
+            <div class="ms-title">后台管理系统</div>
+            <el-form :model="param" :rules="rules" ref="login" label-width="0px" class="ms-content">
+                <el-form-item prop="username">
+                    <el-input v-model="param.username" placeholder="username">
+                        <el-button slot="prepend" icon="el-icon-lx-people"></el-button>
+                    </el-input>
+                </el-form-item>
+                <el-form-item prop="password">
+                    <el-input
+                        type="password"
+                        placeholder="password"
+                        v-model="param.password"
+                        @keyup.enter.native="submitForm()"
+                    >
+                        <el-button slot="prepend" icon="el-icon-lx-lock"></el-button>
+                    </el-input>
+                </el-form-item>
+                <div class="login-btn">
+                    <el-button type="primary" @click="submitForm()">登录</el-button>
+                </div>
+                <!-- <p class="login-tips">Tips : 用户名和密码随便填。</p> -->
+            </el-form>
         </div>
-        <!-- <p class="login-tips">Tips : 用户名和密码随便填。</p> -->
-      </el-form>
     </div>
-  </div>
 </template>
 
 <script>
-
-import { UcenterService } from '@/services'
+import { UcenterService } from '@/services';
 
 export default {
-  data: function () {
-    return {
-      param: {
-        username: '',
-        password: '',
-      },
-      rules: {
-        username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
-        password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
-      },
-    };
-  },
-  methods: {
-    submitForm () {
-      this.$refs.login.validate(valid => {
-        if (valid) {
-          UcenterService.userLogin({
-            username: this.param.username,
-            password: this.param.password
-          }).then(res => {
-            console.log(res);return;
-          })
-          // this.$message.success('登录成功');
-          // localStorage.setItem('ms_username', this.param.username);
-          // this.$router.push('/');
-        } else {
-          this.$message.error('请输入账号和密码');
-          // console.log('error submit!!');
-          return false;
-        }
-      });
+    data: function() {
+        return {
+            param: {
+                username: '',
+                password: ''
+            },
+            rules: {
+                username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
+                password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
+            }
+        };
     },
-  },
+    methods: {
+        submitForm() {
+            this.$refs.login.validate(valid => {
+                if (valid) {
+                    UcenterService.userLogin({
+                        username: this.param.username,
+                        password: this.param.password
+                    }).then(res => {
+                        if (res.code == 1) {
+                          // console.log(res.data.menusList);return;
+                            localStorage.setItem('menus', res.data.menusList); // 菜单数据
+                            localStorage.setItem('authKey', res.data.authKey); // 权限认证
+                            localStorage.setItem('rememberKey', res.data.rememberKey); // 记住密码的加密字符串
+                            localStorage.setItem('authList', res.data.authList); // 权限节点列表
+                            localStorage.setItem('userInfo', res.data.userInfo); // 用户信息
+                            localStorage.setItem('sessionId', res.data.sessionId); // 用户sessionid
+                            // window.axios.defaults.headers.authKey = localStorage.getItem('authKey');
+                            let routerUrl = '';
+                            if (res.data.menusList[0].url) {
+                                routerUrl = res.data.menusList[0].url;
+                            } else {
+                                routerUrl = res.data.menusList[0].child[0].child[0].url;
+                            }
+                            setTimeout(() => {
+                                let path = this.$route.path;
+                                if (routerUrl != path) {
+                                    router.replace(routerUrl);
+                                } else {
+                                    this.$message.error('没有权限');
+                                }
+                            }, 1000);
+                        } else {
+                            this.$message.error('连接超时');
+                        }
+                    });
+                    // this.$message.success('登录成功');
+                    // localStorage.setItem('ms_username', this.param.username);
+                    // this.$router.push('/');
+                } else {
+                    this.$message.error('请输入账号和密码');
+                    // console.log('error submit!!');
+                    return false;
+                }
+            });
+        }
+    }
 };
 </script>
 
