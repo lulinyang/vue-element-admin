@@ -15,7 +15,7 @@
                     </el-tooltip>
                 </div>
                 <!-- 消息中心 -->
-                <div class="btn-bell">
+                <!-- <div class="btn-bell">
                     <el-tooltip
                         effect="dark"
                         :content="message?`有${message}条未读消息`:`消息中心`"
@@ -26,7 +26,7 @@
                         </router-link>
                     </el-tooltip>
                     <span class="btn-bell-badge" v-if="message"></span>
-                </div>
+                </div> -->
                 <!-- 用户头像 -->
                 <div class="user-avator">
                     <img src="../../assets/img/img.jpg" />
@@ -58,15 +58,16 @@ export default {
     },
     computed: {
         username() {
-            let username = localStorage.getItem('ms_username');
-            return username ? username : this.name;
+            let user = Lockr.get('userInfo');
+
+            return user.username;
         }
     },
     methods: {
         // 用户名下拉菜单选择事件
         handleCommand(command) {
             if (command == 'loginout') {
-                localStorage.removeItem('ms_username');
+                Lockr.rm('authKey');
                 this.$router.push('/login');
             }
         },

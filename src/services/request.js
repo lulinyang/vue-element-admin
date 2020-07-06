@@ -21,6 +21,10 @@ export class fetch {
         config.params = {}
       }
       config.headers['Content-Type'] = 'application/json; charset=UTF-8';
+      if (localStorage.getItem('authKey')) {
+        config.headers['authKey'] = localStorage.getItem('authKey');
+      }
+      
       return config
     }, error => {
       console.log(error);
