@@ -68,15 +68,6 @@ export default {
       }
     },
     importExcel () {
-      let importData = this.tableData.map((item, index) => {
-        let data = {};
-        console.log(Object.keys(item));
-        let keys = [];
-        if (Object.keys(item)) {
-
-        }
-        return data;
-      });
       let dataArray = this.groupArray(this.tableData, 7);
       console.log('this.tableData', JSON.stringify(dataArray));
       alert(JSON.stringify(dataArray));
