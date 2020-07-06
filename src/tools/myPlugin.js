@@ -2,8 +2,8 @@ export default {
   install: function (Vue, opt) {
     //删除字符串的头尾空格
     Vue.prototype.myTrim = function (item) {
-      return item.replace(/^\s+|\s+$/gm, '');
-    },
+        return item.replace(/^\s+|\s+$/gm, '');
+      },
       /*对象(删除字符串的头尾空格)*/
       Vue.prototype.myTrimObj = function (object) {
         if (Object.prototype.toString.call(object) === '[object Array]') {
@@ -59,9 +59,22 @@ export default {
         return true
       } else {
         let authList = moduleRule + Lockr.get('authList')
-        console.log(authList);return;
+        console.log(authList);
+        return;
         return _.includes(authList, val)
       }
+    }
+
+    /**
+     * 拆分数组
+     */
+    Vue.prototype.groupArray = (array, subGroupLength) => {
+      let index = 0;
+      let newArray = [];
+      while (index < array.length) {
+        newArray.push(array.slice(index, index += subGroupLength));
+      }
+      return newArray;
     }
   }
 }
