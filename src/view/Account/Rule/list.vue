@@ -163,6 +163,7 @@ export default {
                 id: row.id
             }).then(res => {
                 if (res.code == 1) {
+                    res.data.level = res.data.level.toString();
                     this.form = res.data;
                 }
             });

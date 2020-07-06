@@ -3,7 +3,7 @@
         <div class="container">
             <div class="handle-box">
                 <router-link to="add">
-                    <el-button type="success" icon="el-icon-plus" class="handle-del mr10">添加节点</el-button>
+                    <el-button type="success" icon="el-icon-plus" class="handle-del mr10">添加菜单</el-button>
                 </router-link>
             </div>
             <el-table
@@ -33,14 +33,12 @@
                 </el-table-column>
                 <el-table-column label="操作" width="180" align="center">
                     <template slot-scope="scope">
-                        <router-link :to="{ name: '编辑菜单', params: { id: scope.row.id }}" class="btn-link edit-btn">
                         <el-button
                             type="text"
                             icon="el-icon-edit"
                             @click="handleEdit(scope.$index, scope.row)"
                         >编辑</el-button>
-						</router-link>
-                        
+
                         <el-button
                             type="text"
                             icon="el-icon-delete"
@@ -61,9 +59,16 @@
                 <el-form-item label="标题" prop="title">
                     <el-input v-model.trim="form.title" class="h-40 w-200"></el-input>
                 </el-form-item>
-                <el-form-item label="绑定权限标识" prop="rule_name">
-                    <el-input v-model.trim="form.rule_name" class="h-40 fl w-200" :disabled="true"></el-input>
-                    <el-button class="fl m-l-30" @click="openRule()">查找</el-button>
+                <el-form-item label="绑定权限标识" prop="rule_id">
+                    <el-select v-model="form.rule_id" filterable placeholder="请选择">
+                        <el-option
+                            v-for="item in options"
+                            :key="item.id"
+                            :label="item.title"
+                            :value="item.id"
+                        ></el-option>
+                    </el-select>
+                    <!-- <el-input v-model.trim="form.rule_name" class="h-40 fl w-200" :disabled="true"></el-input> -->
                 </el-form-item>
                 <el-form-item label="菜单类型" prop="menu_type">
                     <el-radio-group v-model="form.menu_type">
@@ -83,16 +88,25 @@
                     </el-select>
                 </el-form-item>
                 <el-form-item label="路径">
-                    <el-input v-model.trim="form.url" class="h-40 w-200"></el-input>
+                    <el-input v-model.trim="form.index" class="h-40 w-200"></el-input>
                 </el-form-item>
-                <el-form-item label="模块" prop="module">
+                <el-form-item label="icon">
+                    <el-input v-model.trim="form.icon" class="h-40 w-200"></el-input>
+                </el-form-item>
+                <!-- <el-form-item label="模块" prop="module">
                     <el-input v-model.trim="form.module" class="h-40 w-200"></el-input>
-                </el-form-item>
+                </el-form-item>-->
                 <el-form-item label="所属菜单">
                     <el-input v-model.trim="form.menu" class="h-40 w-200"></el-input>
                 </el-form-item>
                 <el-form-item label="排序">
                     <el-input v-model="form.sort" class="h-40 w-200"></el-input>
+                </el-form-item>
+                <el-form-item label="是否启用" prop="status">
+                    <el-radio-group v-model="form.status">
+                        <el-radio label="0">禁用</el-radio>
+                        <el-radio label="1">启用</el-radio>
+                    </el-radio-group>
                 </el-form-item>
             </el-form>
             <span slot="footer" class="dialog-footer">
@@ -104,8 +118,7 @@
 </template>
 
 <script>
-import { AdminMenu } from '@/services';
-import ruleList from './rule.vue';
+import { AdminMenu, AdminRule } from '@/services';
 export default {
     name: 'basetable',
     data() {
@@ -126,11 +139,13 @@ export default {
             id: -1,
             rules: {
                 title: [{ required: true, message: '请输入菜单标题' }],
-                rule_name: [{ required: true, message: '请绑定权限标识' }],
+                rule_id: [{ required: true, message: '请绑定权限标识' }],
                 menu_type: [{ required: true, message: '请选择菜单类型' }],
-                module: [{ required: true, message: '请填写菜单模块' }],
-                pid: [{ type: 'number', required: true, message: '请选择上级菜单' }]
-            }
+                pid: [{ type: 'number', required: true, message: '请选择上级菜单' }],
+                menu_type: [{ required: true, message: '请选择启用状态' }],
+                status: [{ required: true, message: '请选择菜单状态' }]
+            },
+            options: {}
         };
     },
     created() {
@@ -142,6 +157,11 @@ export default {
             AdminMenu.getMenuList({}).then(res => {
                 if (res.code == 1) {
                     this.tableData = res.data;
+                }
+            });
+            AdminRule.getRuleList({}).then(res => {
+                if (res.code == 1) {
+                    this.options = res.data;
                 }
             });
         },
@@ -181,6 +201,8 @@ export default {
                 id: row.id
             }).then(res => {
                 if (res.code == 1) {
+                    res.data.menu_type = res.data.menu_type.toString();
+                    res.data.status = res.data.status.toString();
                     this.form = res.data;
                 }
             });
@@ -193,15 +215,21 @@ export default {
                 if (valid) {
                     AdminMenu.editMenu({
                         id: this.form.id,
-                        level: this.form.level,
-                        name: this.form.name,
+                        title: this.form.title,
+                        rule_id: this.form.rule_id,
                         pid: this.form.pid,
-                        status: this.form.status,
-                        title: this.form.title
+                        index: this.form.index,
+                        icon: this.form.icon,
+                        menu_type: this.form.menu_type,
+                        module: 'Main',
+                        menu: this.form.menu,
+                        sort: this.form.sort,
+                        status: this.form.status
                     }).then(res => {
                         if (res.code == 1) {
                             // this.$message.success(`修改第 ${this.idx + 1} 行成功`);
                             this.$message.success(`修改成功`);
+                            this.editVisible = false;
                             this.init();
                         }
                     });
@@ -212,14 +240,7 @@ export default {
         handlePageChange(val) {
             this.$set(this.query, 'pageIndex', val);
             this.getData();
-        },
-        //吊起筛选
-        openRule() {
-            this.$refs.ruleList.open();
         }
-    },
-    components: {
-        ruleList
     }
 };
 </script>

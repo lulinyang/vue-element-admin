@@ -17,7 +17,7 @@ export default new Router({
       name: "系统首页"
     },
     {
-      path: '/home/user/list',
+      path: '/home/controller/list',
       component: resolve => require(['@/view/Account/AdminUser/list.vue'], resolve),
       name: '管理员列表'
     },
@@ -27,9 +27,9 @@ export default new Router({
       name: '菜单管理'
     },
     {
-      path: '/home/menu/edit/:id',
-      component: resolve => require(['@/view/Account/Menu/edit.vue'], resolve),
-      name: '编辑菜单',
+      path: '/home/menu/add',
+      component: resolve => require(['@/view/Account/Menu/add.vue'], resolve),
+      name: '添加菜单',
     },
     {
       path: '/home/rule/list',
@@ -45,6 +45,11 @@ export default new Router({
       path: '/home/groups/list',
       component: resolve => require(['@/view/Account/Group/list.vue'], resolve),
       name: '用户组管理'
+    },
+    {
+      path: '/home/groups/add',
+      component: resolve => require(['@/view/Account/Group/add.vue'], resolve),
+      name: '添加用户组'
     },
     {
       path: '/neditor',
