@@ -34,7 +34,7 @@ export default {
   data () {
     return {
       collapse: false,
-      items:[],
+      items: [],
       items: [
         {
           icon: 'el-icon-lx-home',
