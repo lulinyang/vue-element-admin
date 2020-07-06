@@ -33,7 +33,7 @@
                 </el-table-column>
                 <el-table-column label="操作" width="180" align="center">
                     <template slot-scope="scope">
-                        <router-link :to="{ name: 'menuEdit', params: { id: scope.row.id }}" class="btn-link edit-btn">
+                        <router-link :to="{ name: '编辑菜单', params: { id: scope.row.id }}" class="btn-link edit-btn">
                         <el-button
                             type="text"
                             icon="el-icon-edit"
