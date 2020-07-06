@@ -52,19 +52,19 @@ export default {
                         password: this.param.password
                     }).then(res => {
                         if (res.code == 1) {
-                          // console.log(res.data.menusList);return;
-                            localStorage.setItem('menus', res.data.menusList); // 菜单数据
-                            localStorage.setItem('authKey', res.data.authKey); // 权限认证
-                            localStorage.setItem('rememberKey', res.data.rememberKey); // 记住密码的加密字符串
-                            localStorage.setItem('authList', res.data.authList); // 权限节点列表
-                            localStorage.setItem('userInfo', res.data.userInfo); // 用户信息
-                            localStorage.setItem('sessionId', res.data.sessionId); // 用户sessionid
+                        //   console.log(res.data.userInfo);return;
+                            Lockr.set('menus', res.data.menusList); // 菜单数据
+                            Lockr.set('authKey', res.data.authKey); // 权限认证
+                            Lockr.set('rememberKey', res.data.rememberKey); // 记住密码的加密字符串
+                            Lockr.set('authList', res.data.authList); // 权限节点列表
+                            Lockr.set('userInfo', res.data.userInfo); // 用户信息
+                            Lockr.set('sessionId', res.data.sessionId); // 用户sessionid
                             // window.axios.defaults.headers.authKey = localStorage.getItem('authKey');
                             let routerUrl = '';
-                            if (res.data.menusList[0].url != "") {
-                                routerUrl = res.data.menusList[0].url;
+                            if (res.data.menusList[0].index != "") {
+                                routerUrl = res.data.menusList[0].index;
                             } else {
-                                routerUrl = res.data.menusList[0].bus[0].url;
+                                routerUrl = res.data.menusList[0].bus[0].index;
                             }
                             setTimeout(() => {
                                 let path = this.$route.path;

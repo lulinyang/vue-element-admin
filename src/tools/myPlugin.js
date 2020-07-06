@@ -2,8 +2,8 @@ export default {
   install: function (Vue, opt) {
     //删除字符串的头尾空格
     Vue.prototype.myTrim = function (item) {
-        return item.replace(/^\s+|\s+$/gm, '');
-      },
+      return item.replace(/^\s+|\s+$/gm, '');
+    },
       /*对象(删除字符串的头尾空格)*/
       Vue.prototype.myTrimObj = function (object) {
         if (Object.prototype.toString.call(object) === '[object Array]') {
@@ -45,6 +45,22 @@ export default {
         //   message: `${msg}`
         // });
         this.$message.error(msg);
+      }
+    }
+    //返回上一级
+    Vue.prototype.goback = function () {
+      router.go(-1)
+    }
+    //是否拥有权限
+    Vue.prototype.getHasRule = function (val) {
+      const moduleRule = 'admin'
+      let userInfo = Lockr.get('userInfo')
+      if (userInfo.id == 1) {
+        return true
+      } else {
+        let authList = moduleRule + Lockr.get('authList')
+        console.log(authList);return;
+        return _.includes(authList, val)
       }
     }
   }
