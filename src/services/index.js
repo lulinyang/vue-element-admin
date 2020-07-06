@@ -1,7 +1,7 @@
 /* eslint-disable */
 import {  //后台用户相关
-  ucenterService
-} from '@/services/service.ucenter.js'
+  adminuserService
+} from '@/services/service.adminuser.js'
 
 import {  //权限节点相关
   adminRuleService
@@ -12,6 +12,12 @@ import {  //权限节点相关
 } from '@/services/service.adminmenu.js'
 
 
-export const UcenterService = new ucenterService();
+import {  //权限节点相关
+  adminGroupService
+} from '@/services/service.admingroup.js'
+
+
+export const AdminUser = new adminuserService();
 export const AdminRule = new adminRuleService();
 export const AdminMenu = new adminMenuService();
+export const AdminGroup = new adminGroupService();

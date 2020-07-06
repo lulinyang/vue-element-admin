@@ -44,7 +44,7 @@ export default {
   },
   watch: {
     $route (val) {
-      console.log('val', val);
+      // console.log('val', val);
       this.selectedTag = val;
       this.addViewTags()
       // this.moveToCurrentTag()
@@ -69,7 +69,7 @@ export default {
       }
     },
     generateRoute () {
-      console.log('this.$route.name', this.$route);
+      // console.log('this.$route.name', this.$route);
       if (this.$route.name) {
         return this.$route
       }

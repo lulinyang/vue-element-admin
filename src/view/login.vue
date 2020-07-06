@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import { UcenterService } from '@/services';
+import { AdminUser } from '@/services';
 
 export default {
     data: function() {
@@ -47,7 +47,7 @@ export default {
         submitForm() {
             this.$refs.login.validate(valid => {
                 if (valid) {
-                    UcenterService.userLogin({
+                    AdminUser.userLogin({
                         username: this.param.username,
                         password: this.param.password
                     }).then(res => {

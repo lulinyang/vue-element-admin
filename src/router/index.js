@@ -79,8 +79,50 @@ export default new Router({
       name: '登录'
     },
     {
-      path: '*',
-      redirect: '/404'
+      path: '/home/menu/add',
+      component: resolve => require(['@/view/Account/Menu/add.vue'], resolve),
+      name: '添加菜单',
+    },
+    {
+      path: '/home/rule/list',
+      component: resolve => require(['@/view/Account/Rule/list.vue'], resolve),
+      name: '权限规则'
+    },
+    {
+      path: '/home/rule/add',
+      component: resolve => require(['@/view/Account/Rule/add.vue'], resolve),
+      name: '添加权限'
+    },
+    {
+      path: '/home/groups/list',
+      component: resolve => require(['@/view/Account/Group/list.vue'], resolve),
+      name: '用户组管理'
+    },
+    {
+      path: '/home/groups/add',
+      component: resolve => require(['@/view/Account/Group/add.vue'], resolve),
+      name: '添加用户组'
+    },
+    {
+      path: '/neditor',
+      component: resolve => require(['@/view/NEditor/index.vue'], resolve),
+      name: '富文本'
+    },
+    {
+      path: '/excel',
+      component: resolve => require(['@/view/Excel/index.vue'], resolve),
+      name: 'Excel'
+    },
+    {
+      path: '/404',
+      component: () => import('@/view/common/404.vue'),
+      name: '404'
+    },
+    {
+      path: '/403',
+      component: () => import('@/view/common/403.vue'),
+      name: '403'
+
     }
   ]
 });

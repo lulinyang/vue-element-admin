@@ -39,14 +39,14 @@
 </template>
 
 <script>
-import { UcenterService } from '@/services'
+import { AdminUser } from '@/services'
 export default {
   name: 'home',
   data () {
     return {};
   },
   created () {
-    UcenterService.getTopicList({
+    AdminUser.getTopicList({
       open_id: "oEi-Y5MAzQ9Ur_D4H5rNF2ZcYpLM",
       school_id: 2,
       user_id: 10,
