@@ -52,6 +52,11 @@ export default {
           title: '富文本'
         },
         {
+          icon: 'el-icon-lx-cascades',
+          index: 'excel',
+          title: 'Excel'
+        },
+        {
           icon: 'el-icon-lx-calendar',
           index: '3',
           title: '表单相关',
