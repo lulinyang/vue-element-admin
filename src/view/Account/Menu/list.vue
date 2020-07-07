@@ -14,7 +14,6 @@
                 header-cell-class-name="table-header"
                 @selection-change="handleSelectionChange"
             >
-                <el-table-column type="selection" width="55" align="center"></el-table-column>
                 <el-table-column prop="p_title" label="上级菜单"></el-table-column>
                 <el-table-column prop="title" label="标题"></el-table-column>
 

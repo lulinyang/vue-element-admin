@@ -14,7 +14,6 @@
                 header-cell-class-name="table-header"
                 @selection-change="handleSelectionChange"
             >
-                <el-table-column type="selection" width="55" align="center"></el-table-column>
                 <el-table-column prop="title" label="组名"></el-table-column>
                 <el-table-column prop="remark" label="名称"></el-table-column>
                 <el-table-column label="状态" align="center">
@@ -77,11 +76,11 @@
                     ></el-input>
                 </el-form-item>
                 <el-form-item label="是否启用" prop="status">
-                <el-radio-group v-model="form.status">
-                    <el-radio label="0">禁用</el-radio>
-                    <el-radio label="1">启用</el-radio>
-                </el-radio-group>
-            </el-form-item>
+                    <el-radio-group v-model="form.status">
+                        <el-radio label="0">禁用</el-radio>
+                        <el-radio label="1">启用</el-radio>
+                    </el-radio-group>
+                </el-form-item>
                 <el-form-item label="权限分配">
                     <div class="bor-gray h-400 ovf-y-auto bor-ra-5 bg-wh">
                         <div v-for="(item,index1) in nodes" :key="index1">
