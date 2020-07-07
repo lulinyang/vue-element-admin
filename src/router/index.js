@@ -30,6 +30,15 @@ export default new Router({
                     }
                 },
                 {
+                  path: '/home/controller/add',
+                  component: resolve => require(['@/view/Account/AdminUser/add.vue'], resolve),
+                  name: 'homeControllerAdd',
+                  meta: {
+                      title: '添加管理员',
+                      keepAlive: true
+                  }
+              },
+                {
                     path: '/home/menu/list',
                     component: resolve => require(['@/view/Account/Menu/list.vue'], resolve),
                     name: 'homeMenuList',

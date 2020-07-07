@@ -36,6 +36,7 @@ Vue.use(VueCookies)
 window.Lockr = Lockr; //缓存Api
 window._ = _//lodash
 window.router = router; //全局路由
+window.store = store; //缓存Api
 
 //使用钩子函数对路由进行权限跳转
 router.beforeEach((to, from, next) => {
