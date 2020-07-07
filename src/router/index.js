@@ -44,7 +44,7 @@ export default new Router({
                     name: 'homeMenuAdd',
                     meta: {
                         title: '添加菜单',
-                        keepAlive: true
+                        keepAlive: false
                     }
                 },
                 {

@@ -86,9 +86,9 @@
                 <el-form-item label="用户组">
                     <el-checkbox-group v-model="selectedGroups">
                         <el-checkbox
-                            v-for="(item,index) in groupOptions"
+                            v-for="(item,key) in groupOptions"
                             :label="item.else"
-                            :key="index"
+                            :key="key"
                             class="form-checkbox"
                         ></el-checkbox>
                     </el-checkbox-group>
@@ -134,10 +134,9 @@ export default {
             idx: -1,
             id: -1,
             rules: {
-                title: [{ required: true, message: '请输入节点名称' }],
-                name: [{ required: true, message: '请输入节点显示名' }],
-                level: [{ required: true, message: '请选择节点类型' }],
-                pid: [{ type: 'number', required: true, message: '请选择父级节点' }]
+                username: [{ required: true, message: '请输入用户名' }],
+                realname: [{ required: true, message: '请输入真实姓名' }],
+                remark: [{ required: true, message: '请输入备注' }]
             },
             groupOptions: {},
             selectedGroups: {}
@@ -145,7 +144,6 @@ export default {
     },
     created() {
         this.init();
-        this.getCompleteData();
     },
     methods: {
         //初始化
@@ -177,6 +175,7 @@ export default {
                             }
                         });
                     });
+                    this.editVisible = true;
                 }
             });
         },
@@ -221,32 +220,40 @@ export default {
         // 编辑操作
         handleEdit(index, row) {
             this.id = row.id;
-            AdminUser.readUser({
-                id: row.id
-            }).then(res => {
-                if (res.code == 1) {
-                    res.data.status = res.data.status.toString();
-                    this.form = res.data;
-                }
-            });
-            this.editVisible = true;
+            this.getCompleteData();
+
+            // AdminUser.readUser({
+            //     id: row.id
+            // }).then(res => {
+            //     if (res.code == 1) {
+            //         res.data.status = res.data.status.toString();
+            //         this.form = res.data;
+            //     }
+            // });
         },
         // 保存编辑
         saveEdit() {
-            this.editVisible = false;
+            if (!this.selectCheckbox()) {
+                this.$message.error('请选择用户组');
+            }
             this.$refs.form.validate(valid => {
                 if (valid) {
+                    if (this.password) {
+                        this.form.password = this.password;
+                    }
                     AdminUser.editUser({
-                        id: this.form.id,
-                        level: this.form.level,
-                        name: this.form.name,
-                        pid: this.form.pid,
-                        status: this.form.status,
+                        id: this.id,
+                        username: this.form.username,
+                        realaname: this.form.realaname,
+                        mobile: this.form.mobile,
+												remark: this.form.remark,
+												password: this.form.password,
                         title: this.form.title
                     }).then(res => {
                         if (res.code == 1) {
                             // this.$message.success(`修改第 ${this.idx + 1} 行成功`);
                             this.$message.success(`修改成功`);
+                            this.editVisible = false;
                             this.init();
                         }
                     });
@@ -257,6 +264,20 @@ export default {
         handlePageChange(val) {
             this.$set(this.query, 'pageIndex', val);
             this.getData();
+        },
+        selectCheckbox() {
+            let temp = false;
+            _(this.groupOptions).forEach(res => {
+                if (this.selectedGroups.toString().indexOf(res.else) > -1) {
+                    this.selectedIds.push(res.id);
+                }
+            });
+            if (this.selectedIds.length) {
+                this.form.group_id = _.cloneDeep(this.selectedIds);
+                temp = true;
+            }
+            this.selectedIds = [];
+            return temp;
         }
     }
 };
