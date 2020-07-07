@@ -44,7 +44,12 @@ export class adminuserService extends fetch {
   }
 
   //删除权限
-  delMenu(data) {
-    return this.get('/admin/adminmenu/del', data)
+  delUser(data) {
+    return this.get('/admin/adminuser/del', data)
+  }
+
+  //修改密码
+  changePwd(data) {
+    return this.post('/admin/adminuser/profile',  data)
   }
 }

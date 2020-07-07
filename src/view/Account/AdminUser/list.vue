@@ -3,7 +3,12 @@
         <div class="container">
             <div class="handle-box">
                 <router-link to="add">
-                    <el-button type="success" icon="el-icon-plus" class="handle-del mr10">添加管理员</el-button>
+                    <el-button
+                        type="success"
+                        v-if="getHasRule('admin-users-save')"
+                        icon="el-icon-plus"
+                        class="handle-del mr10"
+                    >添加管理员</el-button>
                 </router-link>
             </div>
             <el-table
@@ -34,11 +39,13 @@
                 <el-table-column label="操作" width="180" align="center">
                     <template slot-scope="scope">
                         <el-button
+                            v-if="getHasRule('admin-users-update')"
                             type="text"
                             icon="el-icon-edit"
                             @click="handleEdit(scope.$index, scope.row)"
                         >编辑</el-button>
                         <el-button
+                            v-if="getHasRule('admin-users-delete')"
                             type="text"
                             icon="el-icon-delete"
                             class="red"
@@ -73,13 +80,13 @@
                 <el-form-item label="密码">
                     <el-input v-model.trim="password" class="h-40 w-200"></el-input>
                 </el-form-item>
-                <el-form-item label="真实姓名" prop="realname">
+                <el-form-item label="真实姓名">
                     <el-input v-model.trim="form.realname" class="h-40 w-200"></el-input>
                 </el-form-item>
                 <el-form-item label="手机号" prop="mobile">
                     <el-input v-model.trim="form.mobile" class="h-40 w-200"></el-input>
                 </el-form-item>
-                <el-form-item label="备注" prop="remark">
+                <el-form-item label="备注">
                     <el-input v-model.trim="form.remark" class="h-40 w-200"></el-input>
                 </el-form-item>
                 <el-form-item label="是否启用" prop="status">
@@ -115,8 +122,6 @@ export default {
     data() {
         return {
             query: {
-                address: '',
-                name: '',
                 pageIndex: 1,
                 pageSize: 10
             },
@@ -141,8 +146,8 @@ export default {
             id: -1,
             rules: {
                 username: [{ required: true, message: '请输入用户名' }],
-                realname: [{ required: true, message: '请输入真实姓名' }],
-                remark: [{ required: true, message: '请输入备注' }],
+                // realname: [{ required: true, message: '请输入真实姓名' }],
+                // remark: [{ required: true, message: '请输入备注' }],
                 status: [{ required: true, message: '请选择启用状态' }]
             },
             groupOptions: [],

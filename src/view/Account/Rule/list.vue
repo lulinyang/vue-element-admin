@@ -1,9 +1,9 @@
 <template>
     <div>
         <div class="container">
-            <div class="handle-box">
+            <div class="handle-box" >
                 <router-link to="add">
-                    <el-button type="success" icon="el-icon-plus" class="handle-del mr10">添加节点</el-button>
+                    <el-button type="success" v-if="getHasRule('admin-rules-save')" icon="el-icon-plus" class="handle-del mr10">添加节点</el-button>
                 </router-link>
             </div>
             <el-table
@@ -33,11 +33,13 @@
                 <el-table-column label="操作" width="180" align="center">
                     <template slot-scope="scope">
                         <el-button
+                            v-if="getHasRule('admin-rules-update')"
                             type="text"
                             icon="el-icon-edit"
                             @click="handleEdit(scope.$index, scope.row)"
                         >编辑</el-button>
                         <el-button
+                            v-if="getHasRule('admin-rules-delete')"
                             type="text"
                             icon="el-icon-delete"
                             class="red"

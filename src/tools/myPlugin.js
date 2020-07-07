@@ -59,8 +59,6 @@ export default {
         return true
       } else {
         let authList = moduleRule + Lockr.get('authList')
-        console.log(authList);
-        return;
         return _.includes(authList, val)
       }
     }

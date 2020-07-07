@@ -3,7 +3,12 @@
         <div class="container">
             <div class="handle-box">
                 <router-link to="add">
-                    <el-button type="success" icon="el-icon-plus" class="handle-del mr10">添加用户组</el-button>
+                    <el-button
+                        type="success"
+                        v-if="getHasRule('admin-groups-save')"
+                        icon="el-icon-plus"
+                        class="handle-del mr10"
+                    >添加用户组</el-button>
                 </router-link>
             </div>
             <el-table
@@ -32,11 +37,13 @@
                 <el-table-column label="操作" width="180" align="center">
                     <template slot-scope="scope">
                         <el-button
+                            v-if="getHasRule('admin-groups-update')"
                             type="text"
                             icon="el-icon-edit"
                             @click="handleEdit(scope.$index, scope.row)"
                         >编辑</el-button>
                         <el-button
+                            v-if="getHasRule('admin-groups-delete')"
                             type="text"
                             icon="el-icon-delete"
                             class="red"
@@ -258,7 +265,7 @@ export default {
                     this.form.title = res.data.title;
                     this.form.pid = res.data.pid ? res.data.pid.toString() : '';
                     this.form.remark = res.data.remark;
-                    this.form.status = res.data.toString();
+                    this.form.status = res.data.status.toString();
                     let array = res.data.rules.split(',');
                     _(array).forEach(ret => {
                         this.selectedNodes.push(parseInt(ret));
