@@ -17,7 +17,7 @@ export default new Router({
           name: "系统首页"
         },
         {
-          path: '/home/user/list',
+          path: '/home/controller/list',
           component: resolve => require(['@/view/Account/AdminUser/list.vue'], resolve),
           name: '管理员列表'
         },
