@@ -1,6 +1,6 @@
 <template>
     <div class="m-l-50 m-t-30 w-500">
-        <el-form ref="form" :model="form" :rules="rules" label-width="120px">
+        <el-form ref="form" :model="form" :rules="rules" label-width="120px" style="width:500px">
             <el-form-item label="标题" prop="title">
                 <el-input v-model.trim="form.title" class="h-40 w-200"></el-input>
             </el-form-item>
@@ -71,6 +71,7 @@
 import { AdminMenu, AdminRule } from '@/services';
 
 export default {
+    name: 'homeMenuAdd',
     data() {
         return {
             keyword: '',
@@ -146,6 +147,7 @@ export default {
                             // this.$message.success(`修改第 ${this.idx + 1} 行成功`);
                             this.$message.success(`添加成功`);
                             setTimeout(() => {
+                                this.$store.dispatch('delVisitedViews', this.$route);
                                 this.goback();
                             }, 1500);
                         }

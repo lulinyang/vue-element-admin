@@ -105,7 +105,7 @@
 <script>
 import { AdminUser, AdminGroup } from '@/services';
 export default {
-    name: 'basetable',
+    name: 'homeControllerList',
     data() {
         return {
             query: {

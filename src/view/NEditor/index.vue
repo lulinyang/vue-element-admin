@@ -13,6 +13,7 @@
 import VueNeditorWrap from 'vue-neditor-wrap';
 import editor from "@/config/editor";
 export default {
+  name: 'neditor',
   components: {
     VueNeditorWrap
   },
