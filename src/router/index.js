@@ -27,6 +27,11 @@ export default new Router({
           name: '菜单管理'
         },
         {
+          path: '/home/menu/add',
+          component: resolve => require(['@/view/Account/Menu/add.vue'], resolve),
+          name: '添加菜单',
+        },
+        {
           path: '/home/rule/list',
           component: resolve => require(['@/view/Account/Rule/list.vue'], resolve),
           name: '权限规则'
@@ -40,6 +45,11 @@ export default new Router({
           path: '/home/groups/list',
           component: resolve => require(['@/view/Account/Group/list.vue'], resolve),
           name: '用户组管理'
+        },
+        {
+          path: '/home/groups/add',
+          component: resolve => require(['@/view/Account/Group/add.vue'], resolve),
+          name: '添加用户组'
         },
         {
           path: '/neditor',
@@ -73,47 +83,6 @@ export default new Router({
       component: () => import('@/view/login.vue'),
       name: '登录'
     },
-    {
-      path: '/home/menu/add',
-      component: resolve => require(['@/view/Account/Menu/add.vue'], resolve),
-      name: '添加菜单',
-    },
-    {
-      path: '/home/rule/list',
-      component: resolve => require(['@/view/Account/Rule/list.vue'], resolve),
-      name: '权限规则'
-    },
-    {
-      path: '/home/rule/add',
-      component: resolve => require(['@/view/Account/Rule/add.vue'], resolve),
-      name: '添加权限'
-    },
-    {
-      path: '/home/groups/list',
-      component: resolve => require(['@/view/Account/Group/list.vue'], resolve),
-      name: '用户组管理'
-    },
-    {
-      path: '/home/groups/add',
-      component: resolve => require(['@/view/Account/Group/add.vue'], resolve),
-      name: '添加用户组'
-    },
-    {
-      path: '/neditor',
-      component: resolve => require(['@/view/NEditor/index.vue'], resolve),
-      name: '富文本'
-    },
-    {
-      path: '/404',
-      component: () => import('@/view/common/404.vue'),
-      name: '404'
-    },
-    {
-      path: '/403',
-      component: () => import('@/view/common/403.vue'),
-      name: '403'
-
-    }
   ]
 });
 
