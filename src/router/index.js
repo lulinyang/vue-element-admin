@@ -5,6 +5,14 @@ Vue.use(Router);
 
 export default new Router({
     routes: [{
+            path: '/login',
+            component: () => import('@/view/login.vue'),
+            name: 'login',
+            meta: {
+                title: '登录',
+                keepAlive: false
+            }
+        }, {
             path: '/',
             redirect: '/home'
         },
@@ -30,14 +38,14 @@ export default new Router({
                     }
                 },
                 {
-                  path: '/home/controller/add',
-                  component: resolve => require(['@/view/Account/AdminUser/add.vue'], resolve),
-                  name: 'homeControllerAdd',
-                  meta: {
-                      title: '添加管理员',
-                      keepAlive: true
-                  }
-              },
+                    path: '/home/controller/add',
+                    component: resolve => require(['@/view/Account/AdminUser/add.vue'], resolve),
+                    name: 'homeControllerAdd',
+                    meta: {
+                        title: '添加管理员',
+                        keepAlive: true
+                    }
+                },
                 {
                     path: '/home/menu/list',
                     component: resolve => require(['@/view/Account/Menu/list.vue'], resolve),
@@ -143,11 +151,7 @@ export default new Router({
                 }
             ]
         },
-        {
-            path: '/login',
-            component: () => import('@/view/login.vue'),
-            name: '登录'
-        },
+
     ]
 });
 
