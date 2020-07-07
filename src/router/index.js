@@ -27,11 +27,6 @@ export default new Router({
           name: '菜单管理'
         },
         {
-          path: '/home/menu/edit/:id',
-          component: resolve => require(['@/view/Account/Menu/edit.vue'], resolve),
-          name: '编辑菜单',
-        },
-        {
           path: '/home/rule/list',
           component: resolve => require(['@/view/Account/Rule/list.vue'], resolve),
           name: '权限规则'
@@ -107,11 +102,6 @@ export default new Router({
       path: '/neditor',
       component: resolve => require(['@/view/NEditor/index.vue'], resolve),
       name: '富文本'
-    },
-    {
-      path: '/excel',
-      component: resolve => require(['@/view/Excel/index.vue'], resolve),
-      name: 'Excel'
     },
     {
       path: '/404',
