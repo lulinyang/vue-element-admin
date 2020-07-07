@@ -82,6 +82,12 @@
                 <el-form-item label="备注" prop="remark">
                     <el-input v-model.trim="form.remark" class="h-40 w-200"></el-input>
                 </el-form-item>
+                <el-form-item label="是否启用" prop="status">
+                    <el-radio-group v-model="form.status">
+                        <el-radio label="0">禁用</el-radio>
+                        <el-radio label="1">启用</el-radio>
+                    </el-radio-group>
+                </el-form-item>
                 <el-form-item label="用户组">
                     <el-checkbox-group v-model="selectedGroups">
                         <el-checkbox
@@ -121,7 +127,7 @@ export default {
                 realname: '',
                 mobile: '',
                 remark: '',
-                province_id: '',
+                group_id: '',
                 groups: [],
                 status: 1
             },
@@ -136,10 +142,12 @@ export default {
             rules: {
                 username: [{ required: true, message: '请输入用户名' }],
                 realname: [{ required: true, message: '请输入真实姓名' }],
-                remark: [{ required: true, message: '请输入备注' }]
+                remark: [{ required: true, message: '请输入备注' }],
+                status: [{ required: true, message: '请选择启用状态' }]
             },
             groupOptions: [],
-            selectedGroups: []
+            selectedGroups: [],
+            selectedIds: []
         };
     },
     created() {
@@ -157,7 +165,6 @@ export default {
         },
         async getCompleteData() {
             this.groupOptions = await this.getAllGroups();
-            console.log('this.groupOptions', this.groupOptions);
 
             AdminUser.readUser({
                 id: this.id
@@ -168,7 +175,7 @@ export default {
                     this.form.realname = res.data.realname;
                     this.form.mobile = res.data.mobile;
                     this.form.remark = res.data.remark;
-                    this.is_dealer = res.data.is_dealer;
+                    this.form.status = res.data.status.toString();
                     _(res.data.groups).forEach(res1 => {
                         _(this.groupOptions).forEach(res2 => {
                             if (res1.title == res2.else) {
@@ -236,6 +243,7 @@ export default {
         saveEdit() {
             if (!this.selectCheckbox()) {
                 this.$message.error('请选择用户组');
+                return;
             }
             this.$refs.form.validate(valid => {
                 if (valid) {
@@ -249,7 +257,8 @@ export default {
                         mobile: this.form.mobile,
                         remark: this.form.remark,
                         password: this.form.password,
-                        title: this.form.title
+                        status: this.form.status,
+                        group_id: this.form.group_id
                     }).then(res => {
                         if (res.code == 1) {
                             // this.$message.success(`修改第 ${this.idx + 1} 行成功`);
@@ -268,6 +277,7 @@ export default {
                     this.selectedIds.push(res.id);
                 }
             });
+            // console.log(this.selectedIds.length);return;
             if (this.selectedIds.length) {
                 this.form.group_id = _.cloneDeep(this.selectedIds);
                 temp = true;

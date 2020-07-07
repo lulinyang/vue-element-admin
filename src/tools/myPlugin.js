@@ -49,7 +49,7 @@ export default {
     }
     //返回上一级
     Vue.prototype.goback = function () {
-      router.go(-1)
+      this.$store.dispatch('delVisitedViews', this.$route);
     }
     //是否拥有权限
     Vue.prototype.getHasRule = function (val) {
