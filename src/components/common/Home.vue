@@ -7,7 +7,7 @@
       <tags-view></tags-view>
       <div class="content">
         <transition name="fade-transform" mode="out-in">
-          <keep-alive :include="tagsList">
+          <keep-alive :include="$store.state.tagsView.cachedViews">
             <router-view></router-view>
           </keep-alive>
         </transition>
@@ -26,7 +26,6 @@ import TagsView from './TagsView.vue';;
 export default {
   data () {
     return {
-      tagsList: [],
       collapse: false
     };
   },

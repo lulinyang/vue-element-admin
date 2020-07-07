@@ -90,7 +90,7 @@
 <script>
 import { AdminRule } from '@/services';
 export default {
-    name: 'basetable',
+    name: 'homeRuleList',
     data() {
         return {
             query: {

@@ -122,7 +122,7 @@
 <script>
 import { AdminGroup, AdminRule } from '@/services';
 export default {
-    name: 'basetable',
+    name: 'homeGroupsList',
     data() {
         return {
             query: {

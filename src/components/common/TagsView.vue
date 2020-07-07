@@ -2,8 +2,8 @@
   <div class="tags-view-container">
     <scroll-pane class="tags-view-wrapper" ref="scrollPane">
       <router-link ref="tag" :class="isActive(tag)?'active':''" :to="tag" class="tags-view-item" @contextmenu.prevent.native="openMenu(tag,$event)" v-for="tag in Array.from(visitedViews)" :key="tag.path">
-        {{tag.name}}
-        <span class="el-icon-close" v-if="tag.name != '首页' && tag.name !=='系统首页'" @click.prevent.stop='closeSelectedTag(tag)'></span>
+        {{tag.meta.title}}
+        <span class="el-icon-close" v-if="tag.meta.title != '首页' && tag.meta.title !=='系统首页'" @click.prevent.stop='closeSelectedTag(tag)'></span>
       </router-link>
     </scroll-pane>
     <el-dropdown class="contextmenu_aa" trigger="click" @command="handleCommand">
@@ -16,11 +16,6 @@
         <el-dropdown-item divided command="closeAllTags">关闭所有</el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>
-    <!-- <ul class='contextmenu' v-show="visible" :style="{left:left+'px',top:top+'px'}">
-      <li @click="closeSelectedTag(selectedTag)">关闭</li>
-      <li @click="closeOthersTags">关闭其他</li>
-      <li @click="closeAllTags">关闭所有</li>
-    </ul> -->
   </div>
 </template>
  

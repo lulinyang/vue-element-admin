@@ -120,7 +120,7 @@
 <script>
 import { AdminMenu, AdminRule } from '@/services';
 export default {
-    name: 'basetable',
+    name: 'homeMenuList',
     data() {
         return {
             query: {

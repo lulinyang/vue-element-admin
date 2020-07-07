@@ -68,6 +68,7 @@
 <script>
 import { AdminGroup, AdminRule } from '@/services';
 export default {
+    name: 'homeGroupsAdd',
     data() {
         return {
             isLoading: false,

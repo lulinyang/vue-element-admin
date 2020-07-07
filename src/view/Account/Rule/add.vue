@@ -35,6 +35,7 @@
 <script>
 import { AdminRule } from '@/services';
 export default {
+    name: 'homeRuleAdd',
     data() {
         return {
             form: {
