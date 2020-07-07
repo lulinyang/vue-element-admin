@@ -14,7 +14,6 @@
                 header-cell-class-name="table-header"
                 @selection-change="handleSelectionChange"
             >
-                <el-table-column type="selection" width="55" align="center"></el-table-column>
                 <el-table-column prop="username" label="用户名"></el-table-column>
                 <el-table-column prop="mobile" label="手机号"></el-table-column>
                 <el-table-column prop="remark" label="备注"></el-table-column>
@@ -248,8 +247,8 @@ export default {
                         username: this.form.username,
                         realaname: this.form.realaname,
                         mobile: this.form.mobile,
-												remark: this.form.remark,
-												password: this.form.password,
+                        remark: this.form.remark,
+                        password: this.form.password,
                         title: this.form.title
                     }).then(res => {
                         if (res.code == 1) {
@@ -261,11 +260,6 @@ export default {
                     });
                 }
             });
-        },
-        // 分页导航
-        handlePageChange(val) {
-            this.$set(this.query, 'pageIndex', val);
-            this.getData();
         },
         selectCheckbox() {
             let temp = false;
@@ -280,6 +274,11 @@ export default {
             }
             this.selectedIds = [];
             return temp;
+        },
+        // 分页导航
+        handlePageChange(val) {
+            this.$set(this.query, 'pageIndex', val);
+            this.getData();
         }
     }
 };
