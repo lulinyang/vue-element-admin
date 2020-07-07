@@ -89,6 +89,7 @@
                             v-for="(item,key) in groupOptions"
                             :label="item.else"
                             :key="key"
+                            :name="item.else"
                             class="form-checkbox"
                         ></el-checkbox>
                     </el-checkbox-group>
@@ -138,8 +139,8 @@ export default {
                 realname: [{ required: true, message: '请输入真实姓名' }],
                 remark: [{ required: true, message: '请输入备注' }]
             },
-            groupOptions: {},
-            selectedGroups: {}
+            groupOptions: [],
+            selectedGroups: []
         };
     },
     created() {
@@ -157,6 +158,7 @@ export default {
         },
         async getCompleteData() {
             this.groupOptions = await this.getAllGroups();
+            console.log('this.groupOptions', this.groupOptions);
 
             AdminUser.readUser({
                 id: this.id
