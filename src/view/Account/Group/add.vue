@@ -11,6 +11,7 @@
                         :key="index"
                         :label="item.title"
                         :value="item.group_id"
+                        :name="item.title"
                     ></el-option>
                 </el-select>
             </el-form-item>
@@ -74,7 +75,7 @@ export default {
             isLoading: false,
             form: {
                 title: '',
-                pid: '',
+                pid: 0,
                 remark: '',
                 rules: '',
                 status: '',

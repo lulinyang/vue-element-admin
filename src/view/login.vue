@@ -53,7 +53,6 @@ export default {
                         password: this.param.password
                     }).then(res => {
                         if (res.code == 1) {
-                        //   console.log(res.data.userInfo);return;
                             Lockr.set('menus', res.data.menusList); // 菜单数据
                             Lockr.set('authKey', res.data.authKey); // 权限认证
                             Lockr.set('rememberKey', res.data.rememberKey); // 记住密码的加密字符串
@@ -62,14 +61,18 @@ export default {
                             Lockr.set('sessionId', res.data.sessionId); // 用户sessionid
                             // window.axios.defaults.headers.authKey = localStorage.getItem('authKey');
                             let routerUrl = '';
-                            if (res.data.menusList[0].index != "") {
+
+                            if (res.data.menusList[0].index != '' && res.data.menusList[0].menu_type == 2) {
                                 routerUrl = res.data.menusList[0].index;
                             } else {
-                                routerUrl = res.data.menusList[0].bus[0].index;
+                                // console.log(res.data.menusList[0].subs[0]);return;
+                                routerUrl = res.data.menusList[0].subs[0].index;
                             }
+                            
                             setTimeout(() => {
                                 let path = this.$route.path;
                                 if (routerUrl != path) {
+                                    this.$message.success('登录成功');
                                     this.$router.replace(routerUrl);
                                 } else {
                                     this.$message.error('没有权限');

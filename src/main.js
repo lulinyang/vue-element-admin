@@ -41,7 +41,6 @@ window.store = store; //缓存Api
 //使用钩子函数对路由进行权限跳转
 router.beforeEach((to, from, next) => {
   const role = localStorage.getItem('authKey');
-  console.log('role', role, to.path);
   if (!role && to.path !== '/login') {
     next('/login');
   } else {

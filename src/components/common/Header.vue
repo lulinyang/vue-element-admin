@@ -26,7 +26,7 @@
                         </router-link>
                     </el-tooltip>
                     <span class="btn-bell-badge" v-if="message"></span>
-                </div> -->
+                </div>-->
                 <!-- 用户头像 -->
                 <div class="user-avator">
                     <img src="../../assets/img/img.jpg" />
@@ -38,6 +38,7 @@
                         <i class="el-icon-caret-bottom"></i>
                     </span>
                     <el-dropdown-menu slot="dropdown">
+                        <el-dropdown-item divided command="changePwd">修改密码</el-dropdown-item>
                         <el-dropdown-item divided command="loginout">退出登录</el-dropdown-item>
                     </el-dropdown-menu>
                 </el-dropdown>
@@ -67,8 +68,15 @@ export default {
         // 用户名下拉菜单选择事件
         handleCommand(command) {
             if (command == 'loginout') {
-                Lockr.rm('authKey');
-                this.$router.push('/login');
+                this.$confirm('确认退出吗?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消'
+                }).then(() => {
+                    Lockr.rm('authKey');
+                    this.$router.push('/login');
+                });
+            } else if (command == 'changePwd') {
+                this.$router.push('/changepwd');
             }
         },
         // 侧边栏折叠
