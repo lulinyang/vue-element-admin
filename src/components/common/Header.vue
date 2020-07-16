@@ -59,9 +59,9 @@ export default {
     },
     computed: {
         username() {
-            let user = Lockr.get('userInfo');
+            // let user = Lockr.get('userInfo');
 
-            return user.username;
+            return 'admin';
         }
     },
     methods: {

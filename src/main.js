@@ -18,6 +18,9 @@ import Lockr from 'lockr' //缓存Api
 import _ from 'lodash' //lodash
 
 
+import 'vue-fabric/dist/vue-fabric.min.css';
+import { Fabric } from 'vue-fabric';
+Vue.use(Fabric);
 //配置文件
 Vue.prototype.$config = require('@/config/index');
 Vue.config.productionTip = false;
@@ -38,19 +41,20 @@ window._ = _//lodash
 window.router = router; //全局路由
 window.store = store; //缓存Api
 
-//使用钩子函数对路由进行权限跳转
-router.beforeEach((to, from, next) => {
-  const role = localStorage.getItem('authKey');
-  if (!role && to.path !== '/login') {
-    next('/login');
-  } else {
-    next();
-  }
-});
-
 new Vue({
   router,
   store,
   i18n,
   render: h => h(App)
 }).$mount('#app');
+
+
+//使用钩子函数对路由进行权限跳转
+router.beforeEach((to, from, next) => {
+    const role = localStorage.getItem('authKey');
+    if (!role && to.path !== '/login') {
+      next('/login');
+    } else {
+      next();
+    }
+  });

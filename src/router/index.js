@@ -29,87 +29,6 @@ export default new Router({
       }
     },
     {
-      path: '/home/controller/list',
-      component: resolve => require(['@/view/Account/AdminUser/list.vue'], resolve),
-      name: 'homeControllerList',
-      meta: {
-        title: '管理员列表',
-        keepAlive: false
-      }
-    },
-    {
-      path: '/home/controller/add',
-      component: resolve => require(['@/view/Account/AdminUser/add.vue'], resolve),
-      name: 'homeControllerAdd',
-      meta: {
-        title: '添加管理员',
-        keepAlive: true
-      }
-    },
-    {
-      path: '/home/menu/list',
-      component: resolve => require(['@/view/Account/Menu/list.vue'], resolve),
-      name: 'homeMenuList',
-      meta: {
-        title: '菜单管理',
-        keepAlive: false
-      }
-    },
-    {
-      path: '/home/menu/add',
-      component: resolve => require(['@/view/Account/Menu/add.vue'], resolve),
-      name: 'homeMenuAdd',
-      meta: {
-        title: '添加菜单',
-        keepAlive: false
-      }
-    },
-    {
-      path: '/home/rule/list',
-      component: resolve => require(['@/view/Account/Rule/list.vue'], resolve),
-      name: 'homeRuleList',
-      meta: {
-        title: '权限规则',
-        keepAlive: false
-      }
-    },
-    {
-      path: '/home/rule/add',
-      component: resolve => require(['@/view/Account/Rule/add.vue'], resolve),
-      name: 'homeRuleAdd',
-      meta: {
-        title: '添加权限',
-        keepAlive: true
-      }
-    },
-    {
-      path: '/home/groups/list',
-      component: resolve => require(['@/view/Account/Group/list.vue'], resolve),
-      name: 'homeGroupsList',
-      meta: {
-        title: '用户组管理',
-        keepAlive: false
-      }
-    },
-    {
-      path: '/home/groups/add',
-      component: resolve => require(['@/view/Account/Group/add.vue'], resolve),
-      name: 'homeGroupsAdd',
-      meta: {
-        title: '添加用户组',
-        keepAlive: true
-      }
-    },
-    {
-      path: '/changepwd',
-      component: resolve => require(['@/view/changepwd.vue'], resolve),
-      name: 'changepwd',
-      meta: {
-        title: '修改登录密码',
-        keepAlive: true
-      }
-    },
-    {
       path: '/neditor',
       component: resolve => require(['@/view/NEditor/index.vue'], resolve),
       name: 'neditor',
@@ -136,6 +55,15 @@ export default new Router({
         keepAlive: false
       }
     },
+    {
+        path: '/translate',
+        component: resolve => require(['@/view/Translate/index.vue'], resolve),
+        name: 'translate',
+        meta: {
+          title: '画图',
+          keepAlive: false
+        }
+      },
     {
       path: '/404',
       component: () => import('@/view/common/404.vue'),

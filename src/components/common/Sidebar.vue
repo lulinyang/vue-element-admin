@@ -42,19 +42,29 @@ export default {
           title: '系统首页'
         },
         {
-          icon: 'el-icon-lx-cascades',
+          icon: 'el-icon-s-grid',
           index: 'baseTable',
           title: '基础表格'
         },
         {
-          icon: 'el-icon-lx-cascades',
+          icon: 'el-icon-document-copy',
           index: 'neditor',
           title: '富文本'
         },
         {
-          icon: 'el-icon-lx-cascades',
-          index: 'excel',
-          title: 'Excel'
+          icon: 'el-icon-upload',
+          index: 'export-excel',
+          title: '导出excel'
+        },
+         {
+          icon: 'el-icon-upload',
+          index: 'upload-excel',
+          title: '导入excel'
+        },
+         {
+          icon: 'el-icon-camera-solid',
+          index: 'translate',
+          title: '画图'
         },
         {
           icon: 'el-icon-lx-calendar',
@@ -91,7 +101,7 @@ export default {
   },
   created () {
     // 通过 Event Bus 进行组件间通信，来折叠侧边栏
-    this.items = Lockr.get('menus');
+    // this.items = Lockr.get('menus');
     // console.log(localStorage.getItem('menus'));
     bus.$on('collapse', msg => {
       this.collapse = msg;
