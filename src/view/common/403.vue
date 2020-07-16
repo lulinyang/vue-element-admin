@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  name: '403',
+  name: 'No authority',
   methods: {
     goBack () {
       this.$router.go(-1);

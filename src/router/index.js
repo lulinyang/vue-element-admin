@@ -67,7 +67,7 @@ export default new Router({
     {
       path: '/404',
       component: () => import('@/view/common/404.vue'),
-      name: '404',
+      name: 'Not find',
       meta: {
         title: '404',
         keepAlive: false
@@ -76,7 +76,7 @@ export default new Router({
     {
       path: '/403',
       component: () => import('@/view/common/403.vue'),
-      name: '403',
+      name: 'No authority',
       meta: {
         title: '403',
         keepAlive: false
